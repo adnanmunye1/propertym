@@ -59,6 +59,18 @@ export default function TenantDetailPage() {
     enabled: !!tenant,
   });
 
+  const { data: invoices } = useQuery({
+    queryKey: ['tenant', id, 'invoices'],
+    queryFn: () => getTenantInvoices(id),
+    enabled: !!tenant,
+  });
+
+  const { data: paymentsData } = useQuery({
+    queryKey: ['tenant', id, 'payments'],
+    queryFn: () => getPayments({ tenantId: id, pageSize: 50 }),
+    enabled: !!tenant,
+  });
+
   const { data: unitsData } = useQuery({
     queryKey: ['units', 'vacant'],
     queryFn: () => getUnits({ status: 'VACANT', pageSize: 100 }),
@@ -215,7 +227,7 @@ export default function TenantDetailPage() {
         </div>
       </div>
 
-      {/* Current Unit Info */}
+      {/* Current Unit Info with Next Payment */}
       {tenant.currentUnit && (
         <Card className="bg-blue-50 border-blue-200">
           <CardContent className="p-6">
@@ -228,6 +240,14 @@ export default function TenantDetailPage() {
                 <p className="text-sm text-blue-700 mt-1">
                   Moved in: {formatDate(tenant.currentTenancy?.moveInDate)}
                 </p>
+                {invoices && invoices.length > 0 && (() => {
+                  const nextUnpaid = invoices.find((inv: any) => Number(inv.paidAmount) < Number(inv.totalAmount));
+                  return nextUnpaid ? (
+                    <p className="text-sm text-blue-700 mt-2">
+                      <span className="font-semibold">Next Payment Due:</span> {formatDate(nextUnpaid.dueDate)} - {formatCurrency(Number(nextUnpaid.totalAmount) - Number(nextUnpaid.paidAmount))}
+                    </p>
+                  ) : null;
+                })()}
               </div>
               <div className="text-right">
                 <p className="text-sm text-blue-700">Monthly Rent</p>
