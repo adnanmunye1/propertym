@@ -262,7 +262,7 @@ export default function NewPaymentPage() {
             )}
 
             <div className="flex items-center gap-4 pt-4">
-              <Button type="submit" disabled={loading || !selectedTenant?.currentUnit}>
+              <Button type="submit" disabled={loading}>
                 {loading ? 'Recording...' : 'Record Payment'}
               </Button>
               <Link href="/payments">
