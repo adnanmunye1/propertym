@@ -153,7 +153,7 @@ export default function PropertyDetailPage() {
 
       {/* Units Section */}
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-gray-900">Units ({property.units?.length || 0})</h2>
+        <h2 className="text-2xl font-bold text-gray-900">Units ({propertyWithUnits.units?.length || 0})</h2>
         <Link href={`/units/new?propertyId=${id}`}>
           <Button className="gap-2">
             <Plus className="w-4 h-4" />
@@ -163,7 +163,7 @@ export default function PropertyDetailPage() {
       </div>
 
       {/* Units List */}
-      {!property.units || property.units.length === 0 ? (
+      {!propertyWithUnits.units || propertyWithUnits.units.length === 0 ? (
         <Card className="p-12">
           <div className="text-center">
             <Home className="w-16 h-16 text-gray-400 mx-auto mb-4" />
