@@ -172,7 +172,7 @@ export default function TenantsPage() {
                           : '-'}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {getStatusBadge(tenant.status)}
+                        <StatusBadge status={tenant.status} type="tenant" />
                       </td>
                     </tr>
                   ))}
