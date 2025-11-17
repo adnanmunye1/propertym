@@ -16,6 +16,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
 import { ArrowLeft } from 'lucide-react';
+import { formatCurrency } from '@/lib/utils';
 import Link from 'next/link';
 
 const paymentSchema = z.object({
