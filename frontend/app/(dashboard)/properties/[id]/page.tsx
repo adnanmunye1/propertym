@@ -72,6 +72,17 @@ export default function PropertyDetailPage() {
     );
   }
 
+  // Cast to access units array from API
+  const propertyWithUnits = property as any;
+
+  const propertyTypeLabels: Record<string, string> = {
+    APARTMENT_BLOCK: 'Apartment Block',
+    SINGLE_HOUSE: 'Single House',
+    BEDSITTER_BLOCK: 'Bedsitter Block',
+    COMMERCIAL: 'Commercial',
+    OTHER: 'Other',
+  };
+
   return (
     <div className="space-y-6">
       {/* Header */}
