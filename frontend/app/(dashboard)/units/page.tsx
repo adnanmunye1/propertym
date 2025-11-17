@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { getUnits } from '@/lib/api/units';
 import { Button } from '@/components/ui/button';
@@ -21,6 +22,7 @@ const statusOptions = [
 ];
 
 export default function UnitsPage() {
+  const router = useRouter();
   const [search, setSearch] = useState('');
   const [status, setStatus] = useState('');
   const [page, setPage] = useState(1);
