@@ -161,7 +161,7 @@ export default function UnitsPage() {
                         <span className="font-medium text-gray-900">{unit.name}</span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="text-sm text-gray-600">{unit.property?.name}</span>
+                        <span className="text-sm text-gray-600">{(unit as any).property?.name}</span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                         {unit.bedrooms ? `${unit.bedrooms} BR · ${unit.bathrooms} BA` : '-'}

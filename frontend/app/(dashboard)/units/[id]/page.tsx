@@ -89,9 +89,9 @@ export default function UnitDetailPage() {
               <h1 className="text-3xl font-bold text-gray-900">Unit {unit.name}</h1>
               {getStatusBadge(unit.status)}
             </div>
-            <Link href={`/properties/${unit.property?.id}`} className="text-gray-600 hover:text-gray-900 mt-1 inline-flex items-center gap-2">
+            <Link href={`/properties/${(unit as any).property?.id}`} className="text-gray-600 hover:text-gray-900 mt-1 inline-flex items-center gap-2">
               <Building2 className="w-4 h-4" />
-              {unit.property?.name}
+              {(unit as any).property?.name}
             </Link>
           </div>
         </div>

@@ -142,7 +142,7 @@ export default function EditUnitPage() {
             <div className="space-y-2">
               <Label>Property</Label>
               <Input
-                value={unit.property?.name || ''}
+                value={(unit as any).property?.name || ''}
                 disabled
                 className="bg-gray-50"
               />
