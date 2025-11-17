@@ -127,7 +127,7 @@ export default function EditUnitPage() {
         </Link>
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Edit Unit</h1>
-          <p className="text-gray-600 mt-1">{unit.name} - {unit.property?.name}</p>
+          <p className="text-gray-600 mt-1">{unit.name} - {(unit as any).property?.name}</p>
         </div>
       </div>
 
