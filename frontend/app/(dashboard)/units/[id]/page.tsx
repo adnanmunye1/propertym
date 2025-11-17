@@ -72,7 +72,7 @@ export default function UnitDetailPage() {
     );
   }
 
-  const currentTenancy = unit.tenancies?.find((t: any) => t.isActive);
+  const currentTenancy = (unit as any).tenancies?.find((t: any) => t.isActive);
 
   return (
     <div className="space-y-6">
