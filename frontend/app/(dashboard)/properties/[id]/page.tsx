@@ -179,7 +179,7 @@ export default function PropertyDetailPage() {
         </Card>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {property.units.map((unit: any) => (
+          {propertyWithUnits.units.map((unit: any) => (
             <Link key={unit.id} href={`/units/${unit.id}`}>
               <Card className="hover:shadow-lg transition-shadow cursor-pointer">
                 <CardContent className="p-6">
