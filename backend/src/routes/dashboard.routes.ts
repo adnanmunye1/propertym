@@ -9,7 +9,7 @@ router.use(authenticate);
 router.get('/metrics', async (_req, res, next) => {
   try {
     const metrics = await calculateDashboardMetrics();
-    return successResponse(res, metrics);
+    successResponse(res, metrics);
   } catch (error) {
     next(error);
   }
@@ -18,7 +18,7 @@ router.get('/metrics', async (_req, res, next) => {
 router.get('/arrears', async (_req, res, next) => {
   try {
     const arrears = await getTenantsWithArrears();
-    return successResponse(res, arrears);
+    successResponse(res, arrears);
   } catch (error) {
     next(error);
   }

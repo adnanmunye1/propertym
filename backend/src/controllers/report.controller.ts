@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { Parser } from 'json2csv';
-import * as XLSX from 'xlsx';
+// import * as XLSX from 'xlsx'; // Reserved for future Excel export
 import prisma from '../utils/prisma';
 import { successResponse, errorResponse } from '../utils/response';
 import { logger } from '../utils/logger';

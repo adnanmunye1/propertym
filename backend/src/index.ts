@@ -69,7 +69,7 @@ app.use((req, _res, next) => {
 // ROUTES
 // ============================================
 
-app.get('/api/health', (req, res) => {
+app.get('/api/health', (_req, res) => {
   res.json({
     success: true,
     message: 'Property Management API is running',

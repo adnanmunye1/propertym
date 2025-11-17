@@ -14,13 +14,11 @@ export const getTenants = async (
 ): Promise<any> => {
   try {
     const {
-      page = '1',
-      pageSize = '20',
-      search,
-      status,
-      propertyId,
-      unitId,
-    } = req.query;
+    page = '1',
+    pageSize = '20',
+    search,
+    status,
+  } = req.query;
 
     const pageNum = parseInt(page as string);
     const pageSizeNum = parseInt(pageSize as string);
