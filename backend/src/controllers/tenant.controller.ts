@@ -157,6 +157,7 @@ export const createTenant = async (
       email,
       emergencyContactName,
       emergencyContactPhone,
+      openingBalance,
       notes,
     } = req.body;
 
@@ -200,6 +201,19 @@ export const createTenant = async (
       );
     }
 
+    // Validate opening balance if provided
+    if (openingBalance !== undefined && openingBalance !== null) {
+      const balance = parseFloat(openingBalance);
+      if (isNaN(balance) || balance < 0) {
+        return errorResponse(
+          res,
+          'Opening balance must be 0 or greater.',
+          'VALIDATION_ERROR',
+          400
+        );
+      }
+    }
+
     // Check for duplicate phone number
     const existingTenant = await prisma.tenant.findFirst({
       where: { phone: formatKenyanPhone(phone) },
@@ -226,6 +240,9 @@ export const createTenant = async (
         emergencyContactPhone: emergencyContactPhone 
           ? formatKenyanPhone(emergencyContactPhone) 
           : null,
+        openingBalance: openingBalance !== undefined && openingBalance !== null 
+          ? parseFloat(openingBalance) 
+          : 0,
         notes,
         status: 'ACTIVE', // Default status, will change based on tenancy
       },

@@ -30,6 +30,11 @@ const tenantSchema = z.object({
     .regex(kenyanPhoneRegex, 'Enter a valid phone number')
     .optional()
     .or(z.literal('')),
+  openingBalance: z.string().optional().transform((val) => {
+    if (!val || val === '') return undefined;
+    const num = parseFloat(val);
+    return isNaN(num) || num < 0 ? undefined : num;
+  }),
   notes: z.string().optional(),
 });
 
@@ -58,6 +63,7 @@ export default function NewTenantPage() {
         email: data.email || undefined,
         emergencyContactName: data.emergencyContactName || undefined,
         emergencyContactPhone: data.emergencyContactPhone || undefined,
+        openingBalance: data.openingBalance || undefined,
       });
       router.push(`/tenants/${tenant.id}`);
     } catch (err: any) {
@@ -199,6 +205,34 @@ export default function NewTenantPage() {
                     <p className="text-sm text-red-600">{errors.emergencyContactPhone.message}</p>
                   )}
                 </div>
+              </div>
+            </div>
+
+            {/* Opening Balance / Arrears */}
+            <div className="space-y-4 pt-4 border-t">
+              <h3 className="font-semibold text-gray-900">Opening Balance (For Migration)</h3>
+              <p className="text-sm text-gray-600">
+                If this tenant is being migrated from another system and has outstanding arrears, enter the amount here. 
+                An invoice will be created when the tenant is moved into a unit.
+              </p>
+              
+              <div className="space-y-2">
+                <Label htmlFor="openingBalance">Opening Balance (KES)</Label>
+                <Input
+                  id="openingBalance"
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  placeholder="0.00"
+                  {...register('openingBalance')}
+                  disabled={loading}
+                />
+                {errors.openingBalance && (
+                  <p className="text-sm text-red-600">{errors.openingBalance.message}</p>
+                )}
+                <p className="text-xs text-gray-500">
+                  Leave empty or 0 if tenant has no outstanding balance
+                </p>
               </div>
             </div>
 

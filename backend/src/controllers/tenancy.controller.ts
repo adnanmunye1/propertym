@@ -198,6 +198,42 @@ export const moveIn = async (
         data: { status: 'ACTIVE' },
       });
 
+      // Create opening balance invoice if tenant has opening balance
+      if (tenant.openingBalance && Number(tenant.openingBalance) > 0) {
+        const openingBalance = Number(tenant.openingBalance);
+        const today = new Date();
+        // Set due date to 30 days ago to make it overdue
+        const dueDate = new Date(today);
+        dueDate.setDate(dueDate.getDate() - 30);
+        
+        // Get previous month for period (YYYY-MM format)
+        const prevMonth = new Date(today);
+        prevMonth.setMonth(prevMonth.getMonth() - 1);
+        const period = `${prevMonth.getFullYear()}-${String(prevMonth.getMonth() + 1).padStart(2, '0')}`;
+
+        await tx.invoice.create({
+          data: {
+            tenancyId: tenancy.id,
+            tenantId: tenant.id,
+            unitId: unit.id,
+            period: `OPENING-${period}`, // Special period format for opening balance
+            dueDate: dueDate,
+            rentAmount: openingBalance,
+            additionalCharges: 0,
+            totalAmount: openingBalance,
+            paidAmount: 0,
+            status: 'OVERDUE',
+            notes: `Opening balance from previous system migration - ${openingBalance} KES`,
+          },
+        });
+
+        logger.info('Opening balance invoice created', {
+          tenantId: tenant.id,
+          tenancyId: tenancy.id,
+          amount: openingBalance,
+        });
+      }
+
       return tenancy;
     });
 

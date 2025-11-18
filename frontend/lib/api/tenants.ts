@@ -9,6 +9,7 @@ export interface CreateTenantDto {
   email?: string;
   emergencyContactName?: string;
   emergencyContactPhone?: string;
+  openingBalance?: number;
   notes?: string;
 }
 
