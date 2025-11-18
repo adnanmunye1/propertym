@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { Request, Response } from 'express';
 import prisma from '../utils/prisma';
-import { authenticateToken } from '../middleware/auth';
+import { authenticate } from '../middleware/auth';
 import { successResponse, errorResponse } from '../utils/response';
 
 const router = Router();
@@ -10,7 +10,7 @@ const router = Router();
  * One-time migration endpoint to add opening_balance column
  * This should be called once and then the route can be removed
  */
-router.post('/add-opening-balance-column', authenticateToken, async (req: Request, res: Response) => {
+router.post('/add-opening-balance-column', authenticate, async (req: Request, res: Response) => {
   try {
     // Check if column already exists
     const result = await prisma.$queryRaw<Array<{ column_name: string }>>`
