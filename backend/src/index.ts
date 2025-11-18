@@ -17,6 +17,7 @@ import paymentRoutes from './routes/payment.routes';
 import documentRoutes from './routes/document.routes';
 import dashboardRoutes from './routes/dashboard.routes';
 import reportRoutes from './routes/report.routes';
+import migrationRoutes from './routes/migration.routes';
 
 // Load environment variables
 dotenv.config();
@@ -88,6 +89,7 @@ app.use('/api/payments', paymentRoutes);
 app.use('/api/documents', documentRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/reports', reportRoutes);
+app.use('/api/migration', migrationRoutes);
 
 // 404 handler
 app.use((_req, res) => {
